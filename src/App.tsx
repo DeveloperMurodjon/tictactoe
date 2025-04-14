@@ -37,13 +37,12 @@ const App = () => {
       } else {
         return space;
       }
-      let win = 0;
-      combinates.map((c) => {});
+      combinates.map((c) => {
+        c;
+      });
     });
     setSpace(n);
   };
-
-  const winner = () => {};
 
   return (
     <div className="container">
