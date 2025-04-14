@@ -26,10 +26,10 @@ const App = () => {
   ];
 
   const fill = (id: number) => {
+    if (spaces[id] !== "*") return;
     const n = spaces.map((space, index) => {
       if (index == id && turn == "X") {
         setTurn("O");
-
         return "X";
       } else if (index == id && space == "*" && turn == "O") {
         setTurn("X");
@@ -37,28 +37,51 @@ const App = () => {
       } else {
         return space;
       }
-      combinates.map((c) => {
-        c;
-      });
     });
+    let win = 0;
+    combinates.map((c) => {
+      let truths = 0;
+      c.map((cc) => {
+        if (n[cc - 1] == turn) {
+          truths++;
+        }
+      });
+      if (truths == 3) {
+        win++;
+      }
+    });
+
     setSpace(n);
+    if (win) {
+      alert(`${turn} - winer`);
+      reset();
+    }
+  };
+
+  const reset = () => {
+    setSpace(["*", "*", "*", "*", "*", "*", "*", "*", "*"]);
   };
 
   return (
-    <div className="container">
-      <div>
-        <div className="w-[600px] mx-auto grid grid-cols-3">
-          {spaces.map((space, index) => (
-            <div
-              onClick={() => fill(index)}
-              key={index}
-              className="aspect-square border flex items-center justify-center text-5xl "
-            >
-              {space == "*" ? " " : space}
-            </div>
-          ))}
-        </div>
+    <div className="container mx-auto flex justify-center items-center">
+      <div className="w-[600px] grid grid-cols-3 mt-6">
+        {spaces.map((space, index) => (
+          <div
+            onClick={() => fill(index)}
+            key={index}
+            className="aspect-square border flex items-center justify-center text-5xl"
+          >
+            {space === "*" ? " " : space}
+          </div>
+        ))}
       </div>
+
+      <button
+        onClick={reset}
+        className="p-3 rounded-md font-medium text-white cursor-pointer bg-red-400 ml-4"
+      >
+        Reset
+      </button>
     </div>
   );
 };
