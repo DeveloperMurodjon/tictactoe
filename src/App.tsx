@@ -53,8 +53,10 @@ const App = () => {
 
     setSpace(n);
     if (win) {
-      alert(`${turn} - winer`);
-      reset();
+      setTimeout(() => {
+        alert(`${turn} - yutdi`);
+        reset();
+      }, 100);
     }
   };
 
